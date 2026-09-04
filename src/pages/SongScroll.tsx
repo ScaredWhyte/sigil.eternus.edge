@@ -1,19 +1,21 @@
 import { Link, Navigate, useParams } from "react-router-dom"
-import { getAdjacentSongs, getSong } from "../lib/songs"
+import { getAdjacentSongsInWave, getSongInWave, getWave } from "../lib/waves"
 import { usePlayerStore } from "../store/player"
 import { LyricsRenderer } from "../components/LyricsRenderer"
 
 export function SongScroll() {
-  const { slug = "" } = useParams()
-  const song = getSong(slug)
+  const { waveSlug = "", songSlug = "" } = useParams()
+  const wave = getWave(waveSlug)
+  const song = getSongInWave(waveSlug, songSlug)
   const play = usePlayerStore((s) => s.play)
   const toggle = usePlayerStore((s) => s.toggle)
   const playingSlug = usePlayerStore((s) => s.slug)
   const playing = usePlayerStore((s) => s.playing)
 
-  if (!song) return <Navigate to="/wave-1" replace />
+  if (!wave) return <Navigate to="/waves" replace />
+  if (!song) return <Navigate to={`/${wave.slug}`} replace />
 
-  const { prev, next } = getAdjacentSongs(slug)
+  const { prev, next } = getAdjacentSongsInWave(waveSlug, songSlug)
   const isCurrent = playingSlug === song.slug
   const isPlayingThis = isCurrent && playing
 
@@ -26,7 +28,11 @@ export function SongScroll() {
       />
 
       <div className="mt-8 text-center">
-        <h1 className="font-display text-4xl text-fg sm:text-5xl">{song.title}</h1>
+        <p className="label text-subtle">
+          Wave {wave.number} · {wave.canonName}
+          {song.movement ? ` · ${song.movement}` : ""}
+        </p>
+        <h1 className="mt-2 font-display text-4xl text-fg sm:text-5xl">{song.title}</h1>
         <p className="font-display mt-1 text-lg italic text-subtle">Song Scroll — v1.0</p>
 
         {song.audio ? (
@@ -42,7 +48,7 @@ export function SongScroll() {
           </button>
         ) : (
           <p className="label mt-6 inline-block rounded-full border border-border px-5 py-2 text-subtle">
-            Audio master forthcoming
+            {song.forthcoming && !song.lyrics ? "Not yet written" : "Audio master forthcoming"}
           </p>
         )}
 
@@ -68,9 +74,15 @@ export function SongScroll() {
         </p>
       )}
 
-      <div className="mt-10 border-t border-border pt-10">
-        <LyricsRenderer lyrics={song.lyrics} />
-      </div>
+      {song.lyrics ? (
+        <div className="mt-10 border-t border-border pt-10">
+          <LyricsRenderer lyrics={song.lyrics} />
+        </div>
+      ) : (
+        <p className="label mt-10 border-t border-border pt-10 text-subtle">
+          This scroll hasn't been written yet.
+        </p>
+      )}
 
       {song.notes && (
         <div className="mt-10 border-t border-border pt-8">
@@ -87,7 +99,7 @@ export function SongScroll() {
 
       <nav className="mt-14 flex items-center justify-between border-t border-border pt-8">
         {prev ? (
-          <Link to={`/wave-1/${prev.slug}`} className="group max-w-[45%]">
+          <Link to={`/${wave.slug}/${prev.slug}`} className="group max-w-[45%]">
             <p className="label text-subtle">← Previous</p>
             <p className="mt-1 truncate font-display text-lg text-fg group-hover:text-parchment">{prev.title}</p>
           </Link>
@@ -95,7 +107,7 @@ export function SongScroll() {
           <span />
         )}
         {next ? (
-          <Link to={`/wave-1/${next.slug}`} className="group max-w-[45%] text-right">
+          <Link to={`/${wave.slug}/${next.slug}`} className="group max-w-[45%] text-right">
             <p className="label text-subtle">Next →</p>
             <p className="mt-1 truncate font-display text-lg text-fg group-hover:text-parchment">{next.title}</p>
           </Link>

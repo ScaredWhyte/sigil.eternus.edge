@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { songs } from "../lib/songs"
+import { waves } from "../lib/waves"
 import { SigilImage } from "../components/SigilImage"
 
 const mosaicSlugs = [
@@ -64,34 +65,25 @@ export function Landing() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
+        <p className="label mb-5 text-subtle">The waves so far</p>
         <div className="grid gap-4 sm:grid-cols-3">
-          <Link
-            to="/waves"
-            className="rounded-2xl border border-border bg-surface p-6 transition hover:border-parchment"
-          >
-            <p className="label text-subtle">Open</p>
-            <h3 className="mt-2 font-display text-2xl text-fg">Wave 1 EchoForm</h3>
-            <p className="mt-2 font-ui text-sm text-muted">Sixteen Song Scrolls, the first public opening.</p>
-          </Link>
-          <a
-            href="/artifacts/questioning-heart.pdf"
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-2xl border border-border bg-surface p-6 transition hover:border-parchment"
-          >
-            <p className="label text-subtle">Artifact</p>
-            <h3 className="mt-2 font-display text-2xl text-fg">The Questioning Heart</h3>
-            <p className="mt-2 font-ui text-sm text-muted">A companion PDF that keeps the scrolls curious.</p>
-          </a>
-          <Link
-            to="/waves"
-            className="rounded-2xl border border-border bg-surface p-6 transition hover:border-parchment"
-          >
-            <p className="label text-subtle">Companion</p>
-            <h3 className="mt-2 font-display text-2xl text-fg">Wave 3 Shard Theory</h3>
-            <p className="mt-2 font-ui text-sm text-muted">A theory companion, offered ahead of its wave.</p>
-          </Link>
+          {waves.map((wave) => (
+            <Link
+              key={wave.slug}
+              to={`/${wave.slug}`}
+              className="rounded-2xl border border-border bg-surface p-6 transition hover:border-parchment"
+            >
+              <p className="label text-subtle">Wave {wave.number}</p>
+              <h3 className="mt-2 font-display text-2xl text-fg">{wave.canonName}</h3>
+              <p className="mt-2 font-ui text-sm text-muted">
+                {wave.songs.length} Song Scrolls{wave.songs.some((s) => s.audio) ? "." : " — lyrics only for now."}
+              </p>
+            </Link>
+          ))}
         </div>
+        <Link to="/waves" className="label mt-6 inline-block text-muted hover:text-fg">
+          See all waves, plus companion artifacts →
+        </Link>
       </section>
     </>
   )
