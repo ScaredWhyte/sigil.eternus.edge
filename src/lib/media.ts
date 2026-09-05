@@ -2,9 +2,10 @@
 // so audio URLs never rot when the archive repo changes.
 const ARCHIVE_OWNER = "ScaredWhyte"
 const ARCHIVE_REPO = "-Whyte-Presents-Eternus-Edge"
-const ARCHIVE_SHA = "6b404edd7f5f1cf8d80f1feed569a588463d8e8d"
+const ARCHIVE_SHA = "c77c89e6f56c9cb4b692241bcf6cf8923b69eef5"
 
 const WAVE_1_AUDIO_PATH = "05_PUBLIC/WAVES/Wave_1_EchoForm/Wave 1 Audio"
+const WAVE_4_AUDIO_PATH = "05_PUBLIC/WAVES/Wave_4_SignalUnderGovernance/Wave 4 Audio"
 
 function encodePath(path: string): string {
   return path.split("/").map(encodeURIComponent).join("/")
@@ -22,5 +23,10 @@ export function githubRaw(path: string): string {
 
 export function wave1Audio(filename: string, opts?: { raw?: boolean }): string {
   const path = `${WAVE_1_AUDIO_PATH}/${filename}`
+  return opts?.raw ? githubRaw(path) : jsDelivr(path)
+}
+
+export function wave4Audio(filename: string, opts?: { raw?: boolean }): string {
+  const path = `${WAVE_4_AUDIO_PATH}/${filename}`
   return opts?.raw ? githubRaw(path) : jsDelivr(path)
 }
