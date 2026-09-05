@@ -2,7 +2,7 @@
 // so audio URLs never rot when the archive repo changes.
 const ARCHIVE_OWNER = "ScaredWhyte"
 const ARCHIVE_REPO = "-Whyte-Presents-Eternus-Edge"
-const ARCHIVE_SHA = "4965cd65e5d12107fddb0bf1aa53b7f8a60ebd6e"
+const ARCHIVE_SHA = "9d999a13e29d6ce861a1f6a76d8dfb86d0df0102"
 
 const WAVE_1_AUDIO_PATH = "05_PUBLIC/WAVES/Wave_1_EchoForm/Wave 1 Audio"
 const WAVE_4_AUDIO_PATH = "05_PUBLIC/WAVES/Wave_4_SignalUnderGovernance/Wave 4 Audio"
