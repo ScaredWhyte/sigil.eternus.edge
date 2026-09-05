@@ -2,6 +2,7 @@ import type { Song } from "./types"
 import { songs as wave1Songs } from "./songs"
 import { songs as moonSongs } from "./moon"
 import { songs as shardTheorySongs } from "./shardTheory"
+import { songs as signalUnderGovernanceSongs } from "./signalUnderGovernance"
 
 export interface Wave {
   slug: string
@@ -41,6 +42,15 @@ export const waves: Wave[] = [
       "A concept album across four movements — fracture, sovereignty, memory, and integration. Some scrolls are still being written; audio comes later.",
     heroSigil: "/sigils/shard-theory-placeholder.svg",
     songs: shardTheorySongs,
+  },
+  {
+    slug: "wave-4",
+    number: 4,
+    canonName: "Signal Under Governance",
+    description:
+      "Eleven tracks tracing one governance cycle — overload, reorientation, rest, clarity, chosen rules, controlled force, restraint, cost, release, integration, and contact. Lyrics are open, audio comes later.",
+    heroSigil: "/sigils/signal-under-governance-placeholder.svg",
+    songs: signalUnderGovernanceSongs,
   },
 ]
 
