@@ -1,5 +1,5 @@
 import { usePlayerStore } from "../store/player"
-import { getSong } from "../lib/songs"
+import { findSongGlobal } from "../lib/waves"
 import { Link } from "react-router-dom"
 
 function formatTime(t: number): string {
@@ -21,8 +21,9 @@ export function PlayerBar() {
   const next = usePlayerStore((s) => s.next)
   const prev = usePlayerStore((s) => s.prev)
 
-  const song = slug ? getSong(slug) : undefined
-  if (!song) return null
+  const found = slug ? findSongGlobal(slug) : undefined
+  if (!found) return null
+  const { wave, song } = found
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-surface/95 backdrop-blur-sm">
@@ -35,12 +36,14 @@ export function PlayerBar() {
 
         <div className="min-w-0 flex-shrink-0 sm:w-40">
           <Link
-            to={`/wave-1/${song.slug}`}
+            to={`/${wave.slug}/${song.slug}`}
             className="block truncate font-display text-base text-fg hover:text-parchment sm:text-lg"
           >
             {song.title}
           </Link>
-          <span className="label hidden text-subtle sm:block">Wave 1</span>
+          <span className="label hidden text-subtle sm:block">
+            Wave {wave.number} · {wave.canonName}
+          </span>
         </div>
 
         <button

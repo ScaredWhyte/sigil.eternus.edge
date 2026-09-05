@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { usePlayerStore } from "../store/player"
-import { getSong } from "../lib/songs"
+import { findSongGlobal } from "../lib/waves"
 
 /** Single hidden <audio> element that survives route changes, driven by the player store. */
 export function GlobalAudio() {
@@ -15,7 +15,7 @@ export function GlobalAudio() {
   const pause = usePlayerStore((s) => s.pause)
   const next = usePlayerStore((s) => s.next)
 
-  const song = slug ? getSong(slug) : undefined
+  const song = slug ? findSongGlobal(slug)?.song : undefined
 
   useEffect(() => {
     const el = audioRef.current

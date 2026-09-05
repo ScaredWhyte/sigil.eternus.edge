@@ -1,12 +1,16 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
-import { songs } from "../lib/songs"
+import { Link, Navigate, useParams } from "react-router-dom"
+import { getWave } from "../lib/waves"
 import { SigilImage } from "../components/SigilImage"
 
-export function WaveOneIndex() {
+export function WaveIndex() {
+  const { waveSlug = "" } = useParams()
   const [query, setQuery] = useState("")
+  const wave = getWave(waveSlug)
 
-  const filtered = songs.filter((song) => {
+  if (!wave) return <Navigate to="/waves" replace />
+
+  const filtered = wave.songs.filter((song) => {
     const q = query.trim().toLowerCase()
     if (!q) return true
     return (
@@ -16,13 +20,19 @@ export function WaveOneIndex() {
     )
   })
 
+  const hasAnyAudio = wave.songs.some((s) => s.audio)
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-      <p className="label text-subtle">Wave 1</p>
-      <h1 className="mt-2 font-display text-5xl text-fg sm:text-6xl">EchoForm</h1>
-      <p className="mt-4 max-w-2xl font-ui text-base text-muted">
-        The first public opening of the Song Scroll Vault. Begin wherever the signal pulls you.
-      </p>
+      <p className="label text-subtle">Wave {wave.number}</p>
+      <h1 className="mt-2 font-display text-5xl text-fg sm:text-6xl">{wave.canonName}</h1>
+      {wave.subtitle && <p className="mt-1 font-display text-xl italic text-parchment">{wave.subtitle}</p>}
+      <p className="mt-4 max-w-2xl font-ui text-base text-muted">{wave.description}</p>
+      {!hasAnyAudio && (
+        <p className="label mt-3 inline-block rounded-full border border-border px-4 py-1.5 text-subtle">
+          Lyrics only — audio coming later
+        </p>
+      )}
 
       <input
         type="text"
@@ -34,9 +44,9 @@ export function WaveOneIndex() {
 
       <div className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
         {filtered.map((song) => {
-          const num = songs.indexOf(song) + 1
+          const num = wave.songs.indexOf(song) + 1
           return (
-            <Link key={song.slug} to={`/wave-1/${song.slug}`} className="group">
+            <Link key={song.slug} to={`/${wave.slug}/${song.slug}`} className="group">
               <div className="relative">
                 <SigilImage
                   src={song.sigil}

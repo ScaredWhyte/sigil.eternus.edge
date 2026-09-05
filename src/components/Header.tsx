@@ -2,10 +2,9 @@ import { NavLink } from "react-router-dom"
 import { useState } from "react"
 
 const navItems = [
-  { to: "/wave-1", label: "Wave 1" },
+  { to: "/waves", label: "Waves" },
   { to: "/about", label: "About" },
   { to: "/bridges", label: "Bridges" },
-  { to: "/waves", label: "Waves" },
 ]
 
 export function Header() {

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { waves } from "../lib/waves"
 
 export function Waves() {
   return (
@@ -10,35 +11,35 @@ export function Waves() {
       </p>
 
       <div className="mt-12 space-y-4">
-        <Link
-          to="/wave-1"
-          className="block rounded-2xl border border-border bg-surface p-6 transition hover:border-parchment"
-        >
-          <div className="flex items-center justify-between">
-            <p className="label text-parchment">Open</p>
-            <span className="label text-subtle">16 scrolls</span>
-          </div>
-          <h2 className="mt-2 font-display text-3xl text-fg">Wave 1 — EchoForm</h2>
-          <p className="mt-2 font-ui text-sm text-muted">
-            The first public opening. Songs written during a year of rebuilding and unexpected clarity.
-          </p>
-        </Link>
-
-        <div className="rounded-2xl border border-border bg-surface p-6 opacity-60">
-          <div className="flex items-center justify-between">
-            <p className="label text-subtle">Unopened</p>
-          </div>
-          <h2 className="mt-2 font-display text-3xl text-fg">Wave 2</h2>
-          <p className="mt-2 font-ui text-sm text-muted">Still forming. Not ready for the edge.</p>
-        </div>
+        {waves.map((wave) => {
+          const hasAnyAudio = wave.songs.some((s) => s.audio)
+          const written = wave.songs.filter((s) => s.lyrics).length
+          return (
+            <Link
+              key={wave.slug}
+              to={`/${wave.slug}`}
+              className="block rounded-2xl border border-border bg-surface p-6 transition hover:border-parchment"
+            >
+              <div className="flex items-center justify-between">
+                <p className="label text-parchment">Open</p>
+                <span className="label text-subtle">
+                  {written}/{wave.songs.length} scrolls{!hasAnyAudio ? " · lyrics only" : ""}
+                </span>
+              </div>
+              <h2 className="mt-2 font-display text-3xl text-fg">
+                Wave {wave.number} — {wave.canonName}
+              </h2>
+              {wave.subtitle && <p className="font-display italic text-parchment">{wave.subtitle}</p>}
+              <p className="mt-2 font-ui text-sm text-muted">{wave.description}</p>
+            </Link>
+          )
+        })}
 
         <div className="rounded-2xl border border-border bg-surface p-6">
-          <div className="flex items-center justify-between">
-            <p className="label text-parchment">Companion</p>
-          </div>
-          <h2 className="mt-2 font-display text-3xl text-fg">Wave 3 — Shard Theory</h2>
+          <p className="label text-parchment">Companion</p>
+          <h2 className="mt-2 font-display text-3xl text-fg">Shard Theory — the theory</h2>
           <p className="mt-2 font-ui text-sm text-muted">
-            A theory companion offered ahead of its wave, for those who want the frame early.
+            A companion essay offered ahead of the wave, for those who want the frame early.
           </p>
           <a
             href="/artifacts/shard-theory-companion.pdf"

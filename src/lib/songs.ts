@@ -1,19 +1,5 @@
 import { wave1Audio } from "./media"
-
-export interface Song {
-  slug: string
-  title: string
-  tone: string
-  themes: string[]
-  sigil: string
-  audio: string | null
-  forthcoming?: boolean
-  formOnly?: boolean
-  notes?: string
-  mood?: string
-  writtenBy: string
-  lyrics: string
-}
+import type { Song } from "./types"
 
 export const songs: Song[] = [
   {
@@ -1210,16 +1196,3 @@ To whom... cares
 Who's... there?`,
   },
 ]
-
-export function getSong(slug: string): Song | undefined {
-  return songs.find((s) => s.slug === slug)
-}
-
-export function getAdjacentSongs(slug: string): { prev: Song | null; next: Song | null } {
-  const idx = songs.findIndex((s) => s.slug === slug)
-  if (idx === -1) return { prev: null, next: null }
-  return {
-    prev: idx > 0 ? songs[idx - 1] : null,
-    next: idx < songs.length - 1 ? songs[idx + 1] : null,
-  }
-}

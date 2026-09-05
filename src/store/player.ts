@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { getSong, songs } from "../lib/songs"
+import { findSongGlobal } from "../lib/waves"
 
 interface PlayerState {
   slug: string | null
@@ -39,8 +39,8 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   seekNonce: 0,
 
   play: (slug) => {
-    const song = getSong(slug)
-    if (!song || !song.audio) return
+    const found = findSongGlobal(slug)
+    if (!found || !found.song.audio) return
     if (get().slug === slug) {
       set({ playing: true })
     } else {
@@ -68,14 +68,22 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
   },
 
   next: () => {
-    const idx = songs.findIndex((s) => s.slug === get().slug)
-    const upcoming = songs.slice(idx + 1).find((s) => s.audio)
+    const slug = get().slug
+    if (!slug) return
+    const found = findSongGlobal(slug)
+    if (!found) return
+    const idx = found.wave.songs.findIndex((s) => s.slug === slug)
+    const upcoming = found.wave.songs.slice(idx + 1).find((s) => s.audio)
     if (upcoming) get().play(upcoming.slug)
   },
 
   prev: () => {
-    const idx = songs.findIndex((s) => s.slug === get().slug)
-    const preceding = [...songs.slice(0, idx)].reverse().find((s) => s.audio)
+    const slug = get().slug
+    if (!slug) return
+    const found = findSongGlobal(slug)
+    if (!found) return
+    const idx = found.wave.songs.findIndex((s) => s.slug === slug)
+    const preceding = [...found.wave.songs.slice(0, idx)].reverse().find((s) => s.audio)
     if (preceding) get().play(preceding.slug)
   },
 
