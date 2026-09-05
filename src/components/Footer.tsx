@@ -18,6 +18,9 @@ export function Footer() {
           <Link to="/waves" className="label text-muted hover:text-fg">
             Waves
           </Link>
+          <Link to="/fiction" className="label text-muted hover:text-fg">
+            Fiction
+          </Link>
         </div>
         <p className="label mt-6 text-subtle">∴Whyte presents · Eternus Edge</p>
       </div>
