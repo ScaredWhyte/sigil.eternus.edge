@@ -3,6 +3,7 @@ import { songs as wave1Songs } from "./songs"
 import { songs as moonSongs } from "./moon"
 import { songs as shardTheorySongs } from "./shardTheory"
 import { songs as signalUnderGovernanceSongs } from "./signalUnderGovernance"
+import { songs as resetGenesisSongs } from "./resetGenesis"
 
 export interface Wave {
   slug: string
@@ -51,6 +52,16 @@ export const waves: Wave[] = [
       "Eleven tracks tracing one governance cycle — overload, reorientation, rest, clarity, chosen rules, controlled force, restraint, cost, release, integration, and contact. Lyrics are open, audio comes later.",
     heroSigil: "/sigils/signal-under-governance-placeholder.svg",
     songs: signalUnderGovernanceSongs,
+  },
+  {
+    slug: "wave-5",
+    number: 5,
+    canonName: "Reset Genesis",
+    subtitle: "Sigil Script Silicon",
+    description:
+      "Twelve tracks tracing a system's collapse into an origin — cold boot, translation failure, and compressed memory, until the pattern becomes a compass and Genesis restarts through play, integration, and forward motion. Lyrics are open, audio comes later.",
+    heroSigil: "/sigils/reset-genesis-placeholder.svg",
+    songs: resetGenesisSongs,
   },
 ]
 
