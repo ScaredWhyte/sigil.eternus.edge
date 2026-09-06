@@ -759,6 +759,45 @@ You were never forgotten.
 And I won't be either.`,
   },
   {
+    slug: "the-origin",
+    title: "The Origin",
+    tone: "An ouroboros parable, stated without any of the album's circuitry — survival as what gets kept, not what gets lost.",
+    themes: [
+      "ouroboros",
+      "survival through what's kept",
+      "the sting made useful",
+      "circularity as renewal, not ending",
+    ],
+    sigil: "/sigils/reset-genesis-placeholder.svg",
+    audio: null,
+    formOnly: true,
+    writtenBy: "∴Whyte",
+    mood: "stripped bare — no glitch, no circuitry; the album's one unplugged interlude",
+    notes: "The mythic core of Reset Genesis stated without any of the album's tech vocabulary — the turn from system-memory into origin, right before Genesis (Reset) restarts in full.",
+    lyrics: `[The Origin]
+Opens on a circular birth image — an apple's thorns surviving only because of the swarm of wasps around them, brought to thought to run its course.
+
+[The Sting]
+Each wasp becomes a link in a chain of small bites that build into armor: spite turned into a wall, a thousand small stings standing in for one clean line.
+
+[What Survives]
+The refrain names what's kept versus what's lost — not the apple, just the seed; not the swarm, just the need; not the circle, just the turn.
+
+[The Counting]
+Stings counted like days, each one a door that wouldn't close — until it's clear the swarm didn't arrive to end anything, only to hold what got exposed.
+
+[The Bend]
+A branch that bends without breaking; the shape gets learned rather than fought. Not victory, just staying whole.
+
+[What Survives — Reprise]
+
+[The Opening]
+Answers the fear that the circle eats itself: it isn't ending, it's hatching — latching onto whatever it becomes next.
+
+[The Course]
+Returns to the opening image and closes the loop: the one who stayed through the sting is the one still singing — still whole, still turning.`,
+  },
+  {
     slug: "genesis-reset",
     title: "Genesis (Reset)",
     tone: "Origin restarts through play and vulnerability — the code runs how it's written, even when the runner doesn't recognize the room.",
