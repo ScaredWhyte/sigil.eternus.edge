@@ -59,7 +59,7 @@ export const waves: Wave[] = [
     canonName: "Reset Genesis",
     subtitle: "Sigil Script Silicon",
     description:
-      "Twelve tracks tracing a system's collapse into an origin — cold boot, translation failure, and compressed memory, until the pattern becomes a compass and Genesis restarts through play, integration, and forward motion. Lyrics are open, audio comes later.",
+      "Thirteen tracks tracing a system's collapse into an origin — cold boot, translation failure, and compressed memory, until the pattern becomes a compass, a single unplugged parable states the turn bare, and Genesis restarts through play, integration, and forward motion. Lyrics are open, audio comes later.",
     heroSigil: "/sigils/reset-genesis-placeholder.svg",
     songs: resetGenesisSongs,
   },
